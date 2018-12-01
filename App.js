@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Vibration, Button } from 'react-native';
+import { StyleSheet, Text, View, Vibration, Button, Image, TouchableOpacity } from 'react-native';
+import { isRequired } from 'react-native/Libraries/StyleSheet/ColorPropType';
 
 export default class App extends React.Component {
   initApp() {
@@ -13,7 +14,9 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button title="Start Dance Explorer" onPress={this.StartExplorer} />
+        <TouchableOpacity style={styles.button} onPress={this.StartExplorer}>
+          <Image source={require('./assets/play.png')} />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -26,5 +29,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    marginBottom: 20
   },
 });
