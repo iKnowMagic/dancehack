@@ -15,7 +15,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={this.StartExplorer}>
-          <Image source={require('./assets/play.png')} style={this.image} />
+          <Image source={require('./assets/play.png')} style={styles.image} />
         </TouchableOpacity>
       </View>
     );
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    resizeMode: 'cover'
+    resizeMode: 'center'
   }
 });
