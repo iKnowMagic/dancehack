@@ -4,16 +4,39 @@ import { isRequired } from 'react-native/Libraries/StyleSheet/ColorPropType';
 
 export default class App extends React.Component {
   StartExplorer() {
+    /**
+     * L = 500
+     * R = 500, 500
+     * F = 500, 500, 500
+     * B = 500, 500, 500, 500
+     *
+     */
     function initApp() {
       const plot = [
-        0, 500, 0, 0, 500
+        500,
+        5000,
+        5000, 500, 500,
+        5000, 500,
+        5000, 500,
+        5000, 500,
+        5000, 500, 500,
+        5000, 500, 500,
+        5000,
+        5000,
+        5000,
+        5000, 500, 500,
+        5000, 500,
+        5000, 500,
+        5000, 500, 500, 500,
+        5000, 500, 500, 500,
+        5000, 500
       ]
       return plot
     }
     let plot = initApp()
     setTimeout(function() {
       Vibration.vibrate(plot)
-    }, 2000)
+    }, 10000)
 
   }
   componentDidMount() {
