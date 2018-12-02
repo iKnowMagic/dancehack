@@ -3,10 +3,18 @@ import { StyleSheet, Text, View, Vibration, Button, Image, TouchableOpacity } fr
 import { isRequired } from 'react-native/Libraries/StyleSheet/ColorPropType';
 
 export default class App extends React.Component {
-  initApp() {
-  }
   StartExplorer() {
-    Vibration.vibrate([250, 10000, 250, 2000, 250, 250, 250, 250])
+    function initApp() {
+      const plot = [
+        0, 500, 0, 0, 500
+      ]
+      return plot
+    }
+    let plot = initApp()
+    setTimeout(function() {
+      Vibration.vibrate(plot)
+    }, 2000)
+
   }
   componentDidMount() {
     // Vibration.vibrate([250, 250])
