@@ -1,86 +1,92 @@
-import React from 'react';
-import { StyleSheet, Text, View, Vibration, Button, Image, TouchableOpacity } from 'react-native';
-import { isRequired } from 'react-native/Libraries/StyleSheet/ColorPropType';
+import React from 'react'
+import { StyleSheet, View, Vibration, Image, TouchableOpacity } from 'react-native'
+import { view } from 'react-easy-state'
+import store from './store'
 
-export default class App extends React.Component {
-  state = { vibrate: null }
+class App extends React.Component {
+
   StartExplorer() {
-
     function initApp() {
       const plot = [
-        5000,
-        3200, 600, 600, 600,
-        5000,
-        4400, 600,
-        4400, 600,
-        4400, 600,
-        3800, 600, 600,
-        3800, 600, 600,
-        5000,
-        5000,
-        5000,
-        3800, 600, 600,
-        4400, 600,
-        4400, 600,
-        3200, 600, 600, 600,
-        3200, 600, 600, 600,
-        4400, 600,
+        4000,
+        4000, 600, 600, 600,
+        4000,
+        4000, 600,
+        4000, 600,
+        4000, 600,
+        4000, 600, 600,
+        4000, 600, 600,
+        4000,
+        4000,
+        4000,
+        4000, 600, 600,
+        4000, 600,
+        4000, 600,
+        4000, 600, 600, 600,
+        4000, 600, 600, 600,
+        4000, 600,
 
-        5000,
-        3200, 600, 600, 600,
-        5000,
-        4400, 600,
-        4400, 600,
-        4400, 600,
-        3800, 600, 600,
-        3800, 600, 600,
-        5000,
-        5000,
-        5000,
-        3800, 600, 600,
-        4400, 600,
-        4400, 600,
-        3200, 600, 600, 600,
-        3200, 600, 600, 600,
-        4400, 600,
+        4000,
+        4000, 600, 600, 600,
+        4000,
+        4000, 600,
+        4000, 600,
+        4000, 600,
+        4000, 600, 600,
+        4000, 600, 600,
+        4000,
+        4000,
+        4000,
+        4000, 600, 600,
+        4000, 600,
+        4000, 600,
+        4000, 600, 600, 600,
+        4000, 600, 600, 600,
+        4000, 600,
 
-        5000,
-        3200, 600, 600, 600,
-        5000,
-        4400, 600,
-        4400, 600,
-        4400, 600,
-        3800, 600, 600,
-        3800, 600, 600,
-        5000,
-        5000,
-        5000,
-        3800, 600, 600,
-        4400, 600,
-        4400, 600,
-        3200, 600, 600, 600,
-        3200, 600, 600, 600,
-        4400, 600
+        4000,
+        4000, 600, 600, 600,
+        4000,
+        4000, 600,
+        4000, 600,
+        4000, 600,
+        4000, 600, 600,
+        4000, 600, 600,
+        4000,
+        4000,
+        4000,
+        4000, 600, 600,
+        4000, 600,
+        4000, 600,
+        4000, 600, 600, 600,
+        4000, 600, 600, 600,
+        4000, 600,
+
+        4000, 600, 600, 600, 600, 600, 600, 600
       ]
       return plot
     }
     let plot = initApp()
+    store.setPlay(true)
     setTimeout(function () {
       Vibration.vibrate(plot)
-    }, 2000)
+    }, 500)
   }
-  stopExplorer() {
+  StopExplorer() {
     Vibration.cancel()
+    store.setPlay(false)
   }
   componentDidMount() {
-    // Vibration.vibrate([250, 250])
   }
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={this.StartExplorer}>
+        {store.play === false && <TouchableOpacity style={styles.button} onPress={this.StartExplorer}>
           <Image source={require('./assets/play.png')} style={styles.image} />
-        </TouchableOpacity>
+        </TouchableOpacity>}
+        {store.play === true && <TouchableOpacity style={styles.button} onPress={this.StopExplorer}>
+          <Image source={require('./assets/stop.png')} style={styles.image} />
+        </TouchableOpacity>}
       </View>
     );
   }
@@ -104,3 +110,6 @@ const styles = StyleSheet.create({
     resizeMode: 'center'
   }
 });
+
+
+export default view(App)
