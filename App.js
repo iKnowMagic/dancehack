@@ -1,10 +1,13 @@
 import React from 'react'
-import { StyleSheet, View, Vibration, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Vibration, Image, Text, TouchableOpacity } from 'react-native'
 import { view } from 'react-easy-state'
+import { KeepAwake } from 'expo'
+import TimerMixin from 'react-timer-mixin'
+import createReactClass from 'create-react-class'
 import store from './store'
 
-class App extends React.Component {
-
+var App = createReactClass({
+  mixins: [TimerMixin],
   StartExplorer() {
     function initApp() {
       const plot = [
@@ -68,30 +71,44 @@ class App extends React.Component {
     }
     let plot = initApp()
     store.setPlay(true)
-    setTimeout(function () {
-      Vibration.vibrate(plot)
-    }, 500)
-  }
+    Vibration.vibrate(plot)
+  },
   StopExplorer() {
     Vibration.cancel()
     store.setPlay(false)
-  }
+  },
+  StartCountDown() {
+    store.setSeconds(5)
+    store.setCounting(true)
+    const timer = this.setInterval(function() {
+      store.setSeconds(store.seconds - 1)
+      if (store.seconds <= 1) {
+        this.StartExplorer()
+        store.setCounting(false)
+        clearInterval(timer)
+      }
+    }, 1000)
+  },
   componentDidMount() {
-  }
+  },
+  componentWillUnmount() {
+  },
   render() {
     return (
       <View style={styles.container}>
-        {store.play === false && <TouchableOpacity style={styles.button} onPress={this.StartExplorer}>
+        <KeepAwake />
+        {store.play === false && store.counting === false && <TouchableOpacity style={styles.button} onPress={this.StartCountDown}>
           <Image source={require('./assets/play.png')} style={styles.image} />
         </TouchableOpacity>}
-        {store.play === true && <TouchableOpacity style={styles.button} onPress={this.StopExplorer}>
+        {store.play === true  && store.counting === false && <TouchableOpacity style={styles.button} onPress={this.StopExplorer}>
           <Image source={require('./assets/stop.png')} style={styles.image} />
         </TouchableOpacity>}
+        {store.counting === true && <Text style={styles.counter}>{store.seconds}</Text>}
       </View>
     );
   }
 
-}
+})
 
 const styles = StyleSheet.create({
   container: {
@@ -108,6 +125,9 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: 'center'
+  },
+  counter: {
+    fontSize: 200
   }
 });
 

@@ -7,10 +7,12 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "create-react-class": "^15.6.3",
     "expo": "^31.0.2",
     "react": "16.5.0",
     "react-easy-state": "^6.0.6",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-timer-mixin": "^0.13.4"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
